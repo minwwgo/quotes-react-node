@@ -1,24 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import logo from './quotation-mark-svgrepo-com.svg'
 
 function App() {
+  const [quotes, setQuotes] = useState([]);
+
+  const updateQuote=()=>
+    fetch("https://cyf-node-minwwgo-quote-server.herokuapp.com/quotes/random")
+      .then((res) => res.json())
+      .then((data) => setQuotes(data));
+
+  useEffect(updateQuote, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1> Hello from Quotes React Node </h1>
+      <div className="bg-warning m-5 p-5"> 
+      <img src={logo} />
+      <p> {quotes.quote}</p> 
+      <p className="text-right">{quotes.author}</p></div>
+
+      <button onClick={()=> window.location.reload()}> refresh page</button>
+      <button onClick={updateQuote}>new quote</button>
     </div>
   );
 }
