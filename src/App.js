@@ -15,7 +15,7 @@ function App() {
     <div className="App">
       <h1> Hello from Quotes React Node </h1>
       <div className="bg-warning m-5 p-5"> 
-      <img src={logo} />
+      <img src={logo} alt="logoimage"/>
       <p> {quotes.quote}</p> 
       <p className="text-right">{quotes.author}</p></div>
 
